@@ -1,0 +1,5 @@
+build/*
+!build/nginx
+.gitignore
+init.sh
+readme.md
