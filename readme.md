@@ -18,8 +18,8 @@ docker run -i -t -v ~/develop/projects/horkel/nginx/build:/build --name=build-ng
 docker build -t horkel/nginx:1.12.2 .
 ```
 
-### 运行容器
+### 推送镜像
 
 ```
-docker run -d -p 80:80 -p 443:443 -v ~/develop/docker:/docker -v ~/develop/projects:/public --network arpa --ip 172.20.20.21 --name=nginx horkel/nginx:1.12.2
+docker push horkel/nginx:1.12.2
 ```
