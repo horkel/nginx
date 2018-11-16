@@ -15,11 +15,11 @@ docker run -i -t -v ~/develop/projects/horkel/nginx/build:/build --name=build-ng
 ### 构建镜像
 
 ```
-docker build -t horkel/nginx:1.12.2 .
+docker build -t horkel/nginx:1.14.1 .
 ```
 
 ### 推送镜像
 
 ```
-docker push horkel/nginx:1.12.2
+docker push horkel/nginx:1.14.1
 ```

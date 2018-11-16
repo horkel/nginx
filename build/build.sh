@@ -2,22 +2,27 @@
 
 cd /build/
 
-pacman -Syy --noconfirm
-pacman -S patch tar unzip grep --noconfirm
+pacman -Sy --noconfirm
+pacman -S tar wget grep git --noconfirm
 
-# OpenSSL 支持，打补丁
-tar -zxvf openssl-1.1.0f.tar.gz
-unzip sslconfig.zip
-cd openssl-1.1.0f
-patch -p1 < ../sslconfig-master/patches/openssl__1.1.0_chacha20_poly1305.patch
+# OpenSSL 支持
+wget https://www.openssl.org/source/openssl-1.1.1.tar.gz
+tar -zxvf openssl-1.1.1.tar.gz
 
-# Nginx Certificate Transparency 支持，echo 模块
+# BROTLI 支持
+git clone https://github.com/google/ngx_brotli.git nginx-brotli
+cd nginx-brotli/
+git submodule update --init
 cd ..
-tar -zxvf nginx-ct-1.3.2.tar.gz
+
+# Nginx Echo 模块
+wget https://github.com/openresty/echo-nginx-module/archive/v0.61.tar.gz -o echo-nginx-module-0.61.tar.gz
 tar -zxvf echo-nginx-module-0.61.tar.gz
 
-tar -zxvf nginx-1.12.2.tar.gz
-cd nginx-1.12.2/
+# Nginx
+wget http://nginx.org/download/nginx-1.14.1.tar.gz
+tar -zxvf nginx-1.14.1.tar.gz
+cd nginx-1.14.1/
 
 pacman -S gcc make --noconfirm
 ./configure \
@@ -41,9 +46,10 @@ pacman -S gcc make --noconfirm
     --with-http_stub_status_module \
     --with-http_gzip_static_module \
     --with-http_v2_module \
-    --with-openssl=../openssl-1.1.0f \
+    --with-openssl=../openssl-1.1.1 \
+    --with-openssl-opt='enable-tls1_3 enable-weak-ssl-ciphers' \
     --add-module=../echo-nginx-module-0.61 \
-    --add-module=../nginx-ct-1.3.2
+    --add-module=../nginx-brotli
 
 make
 mv objs/nginx /build/
