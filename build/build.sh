@@ -6,8 +6,8 @@ pacman -Sy --noconfirm
 pacman -S tar wget grep git --noconfirm
 
 # OpenSSL 支持
-wget https://www.openssl.org/source/openssl-1.1.1.tar.gz
-tar -zxvf openssl-1.1.1.tar.gz
+wget https://www.openssl.org/source/openssl-1.1.1c.tar.gz
+tar -zxvf openssl-1.1.1c.tar.gz
 
 # BROTLI 支持
 git clone https://github.com/google/ngx_brotli.git nginx-brotli
@@ -20,9 +20,9 @@ wget https://github.com/openresty/echo-nginx-module/archive/v0.61.tar.gz -o echo
 tar -zxvf echo-nginx-module-0.61.tar.gz
 
 # Nginx
-wget http://nginx.org/download/nginx-1.14.1.tar.gz
-tar -zxvf nginx-1.14.1.tar.gz
-cd nginx-1.14.1/
+wget http://nginx.org/download/nginx-1.17.1.tar.gz
+tar -zxvf nginx-1.17.1.tar.gz
+cd nginx-1.17.1/
 
 pacman -S gcc make --noconfirm
 ./configure \
@@ -46,7 +46,7 @@ pacman -S gcc make --noconfirm
     --with-http_stub_status_module \
     --with-http_gzip_static_module \
     --with-http_v2_module \
-    --with-openssl=../openssl-1.1.1 \
+    --with-openssl=../openssl-1.1.1c \
     --with-openssl-opt='enable-tls1_3 enable-weak-ssl-ciphers' \
     --add-module=../echo-nginx-module-0.61 \
     --add-module=../nginx-brotli

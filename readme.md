@@ -7,7 +7,7 @@
 docker 启动进入 build 环境
 
 ```
-docker run -i -t -v ~/develop/projects/horkel/nginx/build:/build --name=build-nginx horkel/archlinux /bin/bash --login
+docker run -i -t -v ~/develop/projects/horkel/nginx/build:/build --name=build-nginx horkel/client:2019.09.26 /bin/zsh --login
 ```
 
 执行 `/build/build.sh` 文件，编译 nginx
@@ -15,11 +15,11 @@ docker run -i -t -v ~/develop/projects/horkel/nginx/build:/build --name=build-ng
 ### 构建镜像
 
 ```
-docker build -t horkel/nginx:1.14.1 .
+docker build -t horkel/nginx:1.17.1 .
 ```
 
 ### 推送镜像
 
 ```
-docker push horkel/nginx:1.14.1
+docker push horkel/nginx:1.17.1
 ```
